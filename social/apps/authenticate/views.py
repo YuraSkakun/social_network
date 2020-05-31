@@ -24,7 +24,7 @@ def api_root(request, format=None):
         'rest_registration': reverse('rest_registration:register', request=request),
         'rest_framework_login': reverse('rest_framework:login', request=request),
         'user_profile': reverse('user_profile_list', request=request),
-        'posts': reve/rse('post_list', request=request),
+        'posts': reverse('post_list', request=request),
         'user_like_list_by_day': reverse('user_like_list_by_day', request=request),
     })
 
