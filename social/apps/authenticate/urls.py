@@ -22,6 +22,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     path('api/analitics/', UserLikeListByDay.as_view(), name='user_like_list_by_day'),
+
+    path('users/<int:pk>/activity', views.UserActivityDetail.as_view(), name='user-activity-detail'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -19,3 +19,12 @@ class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ('url', 'name', 'permissions')
+
+
+class UserActivitySerializer(serializers.ModelSerializer):
+
+    last_activity = serializers.ReadOnlyField(source='last_login')
+
+    class Meta:
+        model = User
+        fields = ('url', 'username', 'last_activity')

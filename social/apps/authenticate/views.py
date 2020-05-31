@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
-from .serializers import UserSerializer, GroupSerializer
+from .serializers import UserSerializer, GroupSerializer, UserActivitySerializer
 
 from rest_framework.permissions import IsAdminUser
 
@@ -24,7 +24,7 @@ def api_root(request, format=None):
         'rest_registration': reverse('rest_registration:register', request=request),
         'rest_framework_login': reverse('rest_framework:login', request=request),
         'user_profile': reverse('user_profile_list', request=request),
-        'posts': reverse('post_list', request=request),
+        'posts': reve/rse('post_list', request=request),
         'user_like_list_by_day': reverse('user_like_list_by_day', request=request),
     })
 
@@ -71,3 +71,17 @@ class GroupDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def get_object(self):
         return get_object_or_404(Group, pk=self.kwargs.get('pk'))
+
+
+class UserActivityDetail(generics.RetrieveAPIView):
+    """
+    API endpoint that represents a  user activity.
+    """
+    model = User
+    serializer_class = UserActivitySerializer
+    # permission_classes = [IsAdminUser]
+
+    def get_object(self):
+        user =  get_object_or_404(User, pk=self.kwargs.get('pk'))
+        print(user.last_login)
+        return user
